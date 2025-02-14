@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>15.0.0-alpha001</VersionPrefix>
+    <VersionPrefix>15.0.1</VersionPrefix>
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
-    <Authors>Anders Bjerner</Authors>
-    <Company>Limbo</Company>
-    <Title>Skybrud Redirects</Title>
+    <Authors>uHeadles</Authors>
+    <Company>uHeadles</Company>
+    <Title>uHeadles Redirects</Title>
     <Description>Redirects manager for Umbraco.</Description>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
   </PropertyGroup>
