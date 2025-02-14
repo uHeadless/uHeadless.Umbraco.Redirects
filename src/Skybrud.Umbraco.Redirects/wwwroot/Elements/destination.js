@@ -3,7 +3,7 @@ import { LitElement, html, css, when } from "@umbraco-cms/backoffice/external/li
 import "@umbraco-cms/backoffice/components";
 import { UMB_MODAL_MANAGER_CONTEXT } from "@umbraco-cms/backoffice/modal";
 import { UMB_NOTIFICATION_CONTEXT } from "@umbraco-cms/backoffice/notification";
-import { UMB_LINK_PICKER_MODAL } from "@umbraco-cms/backoffice/multi-url-picker/link-picker-modal/link-picker-modal.token.js";
+import { UMB_LINK_PICKER_MODAL } from "@umbraco-cms/backoffice/multi-url-picker";
 
 import { RedirectsService } from "@skybrud-redirects/service";
 
@@ -54,23 +54,36 @@ export class RedirectsDestinationElement extends UmbElementMixin(LitElement) {
 
         const self = this;
 
-        const modalContext = this.modalManagerContext?.open(this, UMB_LINK_PICKER_MODAL);
+        const modalContext = this.modalManagerContext?.open(this, UMB_LINK_PICKER_MODAL, {
+			data: {
+				config: {},
+				index: null,
+				isNew: true,
+			},
+			value: {
+				link: this.value?.link ?? {},
+			},
+		});
 
         modalContext.onSubmit().then(function (value) {
 
 
-            if (!value.link) {
+            if (!value?.link) {
                 alert("No link");
                 return;
             }
 
-            if (!value.link.url) {
+            if (!value?.link?.url) {
                 alert("No link URL");
                 return;
             }
 
-            switch (value.link.type) {
+            if (!value?.link?.type) {
+                alert("No link type");
+                return;
+            }
 
+            switch (value.link.type) {
                 case "document":
                     RedirectsService.getContent(value.link.unique).then(function (res) {
                         self.value = {
